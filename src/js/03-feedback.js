@@ -11,14 +11,14 @@ let data = JSON.parse(localStorage.getItem('feedback-form-state')) || {
   message: '',
 };
 
-const hadnleChange = e => {
+const handleChange = e => {
   const { name, value } = e.target;
   data[name] = value;
   const formData = JSON.stringify(data);
   localStorage.setItem('feedback-form-state', formData);
 };
 
-const hadnleChangeInput = throttle(hadnleChange, 500);
+const handleChangeInput = throttle(handleChange, 500);
 
 const onFillFormLoad = ({ email, message }) => {
   refs.emailInput.value = email;
@@ -27,7 +27,7 @@ const onFillFormLoad = ({ email, message }) => {
 
 window.addEventListener('load', onFillFormLoad(data));
 
-refs.form.addEventListener('input', hadnleChangeInput);
+refs.form.addEventListener('input', handleChangeInput);
 
 refs.form.addEventListener('submit', e => {
   e.preventDefault();
