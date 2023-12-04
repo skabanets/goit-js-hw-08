@@ -18,6 +18,14 @@ const handleChange = e => {
   localStorage.setItem('feedback-form-state', formData);
 };
 
+const onFormSubmit = e => {
+  e.preventDefault();
+  console.log(data);
+  localStorage.clear();
+  data = { email: '', message: '' };
+  e.target.reset();
+};
+
 const handleChangeInput = throttle(handleChange, 500);
 
 const onFillFormLoad = ({ email, message }) => {
@@ -29,10 +37,4 @@ window.addEventListener('load', onFillFormLoad(data));
 
 refs.form.addEventListener('input', handleChangeInput);
 
-refs.form.addEventListener('submit', e => {
-  e.preventDefault();
-  console.log(data);
-  localStorage.clear();
-  data = { email: '', message: '' };
-  e.target.reset();
-});
+refs.form.addEventListener('submit', onFormSubmit);
